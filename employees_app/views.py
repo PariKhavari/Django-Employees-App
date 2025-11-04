@@ -11,7 +11,7 @@ def employee_overview(request):
     all_employees = Employee.objects.all()
     employees_over_3000 = Employee.objects.filter(salary__gt=3000)
     count_over_5000 = Employee.objects.filter(salary__gte=5000).count()
-    sales_employees = Employee.objects.filter(department__name="sales")
+    sales_employees = Employee.objects.filter(department__name="Sales")
     average_salary_sales = sales_employees.aggregate(Avg('salary'))
     employee_bevor_2022_not_in_hr = Employee.objects.filter(
         Q(hire_date__lt=date(2022, 1, 10)) & ~Q(department__name='HR'))
@@ -26,3 +26,5 @@ def employee_overview(request):
     }
 
     return render(request, 'employee_list.html', context)
+
+
